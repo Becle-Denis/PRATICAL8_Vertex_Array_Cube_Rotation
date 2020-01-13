@@ -10,27 +10,50 @@ Game::Game() : window(VideoMode(800, 600), "OpenGL Cube")
 
 Game::~Game() {}
 
+//Cubes Points 
+// FACE 
+// A : -1, 1 -5
+// B : 1, 1, -5 
+// C : 1, -1, -5
+// D : -1, -1 , -5
+//BACK 
+// E : -1, 1 -6
+// F : 1, 1, -6
+// G : 1, -1, -6
+// H : -1, -1 , -6
 
-// Vertices for one Triangle
-float vertices[] = { 1.0f, 1.0f, -5.0f, //T1
+// Vertices
+float vertices[] = { 1.0f, 1.0f, -6.0f, //T1 EFG
+					-1.0f, 1.0f, -6.0f,
+					-1.0f, -1.0f, -6.0f,
+					 1.0f, 1.0f, -6.0f, //T2 FGH
+					 1.0f, -1.0f, -6.0f,
+					-1.0f, -1.0f, -6.0f,
+					1.0f, 1.0f, -5.0f, //T3 ABC
 					-1.0f, 1.0f, -5.0f,
 					-1.0f, -1.0f, -5.0f,
-					 1.0f, 1.0f, -5.0f, //T2
+					 1.0f, 1.0f, -5.0f, //T4 BCD
 					 1.0f, -1.0f, -5.0f,
 					-1.0f, -1.0f, -5.0f 
 };
 
-// Colors for those vertices
-float colors[] = {	0.6f, 0.0f, 0.0f, //T1
+// Colors
+float colors[] = {  0.0f, 0.0f, 0.8f, //T1 
+					0.0f, 0.0f, 1.0f,
+					0.0f, 0.0f, 0.8f,
+					0.0f, 0.0f, 0.6f, //T2
+					0.0f, 0.0f, 0.3f,
+					0.0f, 0.0f, 0.6f,
+					0.8f, 0.0f, 0.0f, //T3 
 					1.0f, 0.0f, 0.0f,
-					0.6f, 0.0f, 0.0f,
-					0.3f, 0.0f, 0.0f, //T2
-					0.6f, 0.0f, 0.0f,
+					0.8f, 0.0f, 0.0f,
+					0.6f, 0.0f, 0.0f, //T4
 					0.3f, 0.0f, 0.0f,
+					0.6f, 0.0f, 0.0f,
 };
 
 // Index to be drawn
-unsigned int vertex_index[] = { 0,1,2,3,4,5 };
+unsigned int vertex_index[] = { 0,1,2,3,4,5,6,7,8,9,10,11 };
 
 void Game::run()
 {
@@ -87,7 +110,7 @@ void Game::render()
 
 	//glDrawArrays(GL_TRIANGLES, 0, 3);
 
-	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, &vertex_index);
+	glDrawElements(GL_TRIANGLES, 12, GL_UNSIGNED_INT, &vertex_index);
 
 	glDisableClientState(GL_COLOR_ARRAY);
 	glDisableClientState(GL_VERTEX_ARRAY);
