@@ -47,10 +47,16 @@ float vertices[] = { 1.0f, 1.0f, -7.0f, //T1 EFG
 					 1.0f, 1.0f, -5.0f,  //T8 BFG
 					 1.0f, 1.0f, -7.0f,
 					 1.0f, -1.0f, -7.0f,
-					 1.0f, 1.0f, -5.0f,  //T9 ABC
+					-1.0f, 1.0f, -5.0f,  //T9 ABE
+					 1.0f, 1.0f, -5.0f,
+					-1.0f, 1.0f, -7.0f,
+					 1.0f, 1.0f, -5.0f,  //T10 BEF
+					-1.0f, 1.0f, -7.0f,
+					 1.0f, 1.0f, -7.0f,
+					 1.0f, 1.0f, -5.0f,  //T11 ABC
 					-1.0f, 1.0f, -5.0f,
 					-1.0f, -1.0f, -5.0f,
-					 1.0f, 1.0f, -5.0f,  //T10 BCD
+					 1.0f, 1.0f, -5.0f,  //T12 BCD
 					 1.0f, -1.0f, -5.0f,
 					-1.0f, -1.0f, -5.0f
 };
@@ -80,16 +86,22 @@ float colors[] = {  0.0f, 0.0f, 0.8f, //T1
 					0.6f, 0.0f, 0.6f, //T8
 					0.3f, 0.0f, 0.3f,
 					0.6f, 0.0f, 0.6f,
-					0.8f, 0.0f, 0.0f, //T9 
+					0.0f, 0.8f, 0.8f, //T9 
+					0.0f, 1.0f, 1.0f,
+					0.0f, 0.8f, 0.8f,
+					0.0f, 0.3f, 0.3f, //T10
+					0.0f, 0.6f, 0.6f,
+					0.0f, 0.3f, 0.3f,
+					0.8f, 0.0f, 0.0f, //T11 
 					1.0f, 0.0f, 0.0f,
 					0.8f, 0.0f, 0.0f,
-					0.6f, 0.0f, 0.0f, //T10
+					0.6f, 0.0f, 0.0f, //T12
 					0.3f, 0.0f, 0.0f,
 					0.6f, 0.0f, 0.0f
 };
 
 // Index to be drawn
-unsigned int vertex_index[] = { 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29 };
+unsigned int vertex_index[] = { 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35 };
 
 void Game::run()
 {
@@ -146,7 +158,7 @@ void Game::render()
 
 	//glDrawArrays(GL_TRIANGLES, 0, 3);
 
-	glDrawElements(GL_TRIANGLES, 30, GL_UNSIGNED_INT, &vertex_index);
+	glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, &vertex_index);
 
 	glDisableClientState(GL_COLOR_ARRAY);
 	glDisableClientState(GL_VERTEX_ARRAY);
