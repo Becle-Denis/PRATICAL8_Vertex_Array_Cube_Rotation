@@ -228,11 +228,13 @@ void Game::update()
 		{
 			for (int i = 0; i < 108; i += 3)
 			{
-
+				//adapting to vector
 				db::Vector3 v(vertices[i], vertices[i + 1], 1);
 
+				//translating
 				v = v * db::Matrix3::translate(1, 0);
 
+				//reassigning value
 				vertices[i] = v.x;
 				vertices[i + 1] = v.y;
 			}
@@ -243,11 +245,13 @@ void Game::update()
 		{
 			for (int i = 0; i < 108; i += 3)
 			{
-
+				//adapting to vector
 				db::Vector3 v(vertices[i], vertices[i + 1], 1);
 
+				//translating
 				v = v * db::Matrix3::translate(-1, 0);
 
+				//reassigning value
 				vertices[i] = v.x;
 				vertices[i + 1] = v.y;
 			}
@@ -259,11 +263,13 @@ void Game::update()
 		{
 			for (int i = 0; i < 108; i += 3)
 			{
-
+				//adapting to vector
 				db::Vector3 v(vertices[i], vertices[i + 1], 1);
 
+				//translating
 				v = v * db::Matrix3::translate(0, 1);
 
+				//reassigning value
 				vertices[i] = v.x;
 				vertices[i + 1] = v.y;
 			}
@@ -274,13 +280,55 @@ void Game::update()
 		{
 			for (int i = 0; i < 108; i += 3)
 			{
-
+				//adapting to vector
 				db::Vector3 v(vertices[i], vertices[i + 1], 1);
 
+				//translating
 				v = v * db::Matrix3::translate(0, -1);
 
+				//reassigning value
 				vertices[i] = v.x;
 				vertices[i + 1] = v.y;
+			}
+		}
+
+		// Scalling up
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::U))
+		{
+			for (int i = 0; i < 108; i += 3)
+			{
+				//adapting to vector
+				db::Vector3 v(vertices[i], vertices[i + 1], vertices[i + 2]);
+
+				//scalling
+				v = v - center;
+				v = v * db::Matrix3::scale3D(101);
+				v = v + center;
+
+				//reassigning value
+				vertices[i] = v.x;
+				vertices[i + 1] = v.y;
+				vertices[i + 2] = v.z;
+			}
+		}
+
+		// Scalling Down
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+		{
+			for (int i = 0; i < 108; i += 3)
+			{
+				//adapting to vector
+				db::Vector3 v(vertices[i], vertices[i + 1], vertices[i + 2]);
+
+				//scalling
+				v = v - center;
+				v = v * db::Matrix3::scale3D(99);
+				v = v + center;
+
+				//reassigning value
+				vertices[i] = v.x;
+				vertices[i + 1] = v.y;
+				vertices[i + 2] = v.z;
 			}
 		}
 	}
