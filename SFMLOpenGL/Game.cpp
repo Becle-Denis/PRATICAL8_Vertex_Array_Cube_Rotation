@@ -145,78 +145,146 @@ void Game::update()
 
 	cout << "Update up" << endl;
 	
-	//center calculation 
-	float sumX = 0;
-	float sumY = 0;
-	float sumZ = 0;
-	for (int i = 0; i < 108; i += 3)
+	//Allowed movement
+	if (movementCLock.getElapsedTime() > sf::milliseconds(30))
 	{
-		sumX += vertices[i];
-		sumY += vertices[i + 1];
-		sumZ += vertices[i + 2];
-	}
-	db::Vector3 center(sumX / 36, sumY / 36, sumZ / 36);
+		movementCLock.restart();
 
-	// rotation X 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::X))
-	{
+		//center calculation 
+		float sumX = 0;
+		float sumY = 0;
+		float sumZ = 0;
 		for (int i = 0; i < 108; i += 3)
 		{
-			//adapting to vector
-			db::Vector3 v(vertices[i], vertices[i+1], vertices[i+2]);
-			
-			//rotating
-			v = v - center;
-			v = v * db::Matrix3::rotationX(1);
-			v = v + center;
+			sumX += vertices[i];
+			sumY += vertices[i + 1];
+			sumZ += vertices[i + 2];
+		}
+		db::Vector3 center(sumX / 36, sumY / 36, sumZ / 36);
 
-			//reassigning value 
-			vertices[i] = v.x;
-			vertices[i + 1] = v.y;
-			vertices[i + 2] = v.z;
+		// rotation X 
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::X))
+		{
+			for (int i = 0; i < 108; i += 3)
+			{
+				//adapting to vector
+				db::Vector3 v(vertices[i], vertices[i + 1], vertices[i + 2]);
+
+				//rotating
+				v = v - center;
+				v = v * db::Matrix3::rotationX(1);
+				v = v + center;
+
+				//reassigning value 
+				vertices[i] = v.x;
+				vertices[i + 1] = v.y;
+				vertices[i + 2] = v.z;
+			}
+		}
+
+
+		// rotation Y
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Y))
+		{
+			for (int i = 0; i < 108; i += 3)
+			{
+				//adapting to vector
+				db::Vector3 v(vertices[i], vertices[i + 1], vertices[i + 2]);
+
+				//rotating
+				v = v - center;
+				v = v * db::Matrix3::rotationY(1);
+				v = v + center;
+
+				//reassigning value 
+				vertices[i] = v.x;
+				vertices[i + 1] = v.y;
+				vertices[i + 2] = v.z;
+			}
+		}
+
+		// rotation Z 
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
+		{
+			for (int i = 0; i < 108; i += 3)
+			{
+				//adapting to vector
+				db::Vector3 v(vertices[i], vertices[i + 1], vertices[i + 2]);
+
+				//rotating
+				v = v - center;
+				v = v * db::Matrix3::rotationZ(1);
+				v = v + center;
+
+				//reassigning value 
+				vertices[i] = v.x;
+				vertices[i + 1] = v.y;
+				vertices[i + 2] = v.z;
+			}
+		}
+
+		// Translating right
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+		{
+			for (int i = 0; i < 108; i += 3)
+			{
+
+				db::Vector3 v(vertices[i], vertices[i + 1], 1);
+
+				v = v * db::Matrix3::translate(1, 0);
+
+				vertices[i] = v.x;
+				vertices[i + 1] = v.y;
+			}
+		}
+
+		// Translating left
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+		{
+			for (int i = 0; i < 108; i += 3)
+			{
+
+				db::Vector3 v(vertices[i], vertices[i + 1], 1);
+
+				v = v * db::Matrix3::translate(-1, 0);
+
+				vertices[i] = v.x;
+				vertices[i + 1] = v.y;
+			}
+		}
+
+
+		// Translating up
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+		{
+			for (int i = 0; i < 108; i += 3)
+			{
+
+				db::Vector3 v(vertices[i], vertices[i + 1], 1);
+
+				v = v * db::Matrix3::translate(0, 1);
+
+				vertices[i] = v.x;
+				vertices[i + 1] = v.y;
+			}
+		}
+
+		// Translating down
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+		{
+			for (int i = 0; i < 108; i += 3)
+			{
+
+				db::Vector3 v(vertices[i], vertices[i + 1], 1);
+
+				v = v * db::Matrix3::translate(0, -1);
+
+				vertices[i] = v.x;
+				vertices[i + 1] = v.y;
+			}
 		}
 	}
 	
-
-	// rotation Y
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Y))
-	{
-		for (int i = 0; i < 108; i += 3)
-		{
-			//adapting to vector
-			db::Vector3 v(vertices[i], vertices[i + 1], vertices[i + 2]);
-
-			//rotating
-			v = v - center;
-			v = v * db::Matrix3::rotationY(1);
-			v = v + center;
-
-			//reassigning value 
-			vertices[i] = v.x;
-			vertices[i + 1] = v.y;
-			vertices[i + 2] = v.z;
-		}
-	}
-
-	// rotation Z 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
-	{
-		for (int i = 0; i < 108; i += 3)
-		{
-			//adapting to vector
-			db::Vector3 v(vertices[i], vertices[i + 1], vertices[i + 2]);
-
-			//rotating
-			v = v - center;
-			v = v * db::Matrix3::rotationZ(1);
-			v = v + center;
-
-			//reassigning value 
-			vertices[i] = v.x;
-			vertices[i + 1] = v.y;
-			vertices[i + 2] = v.z;
-		}
-	}
 
 }
 
