@@ -157,7 +157,7 @@ void Game::update()
 	}
 	db::Vector3 center(sumX / 36, sumY / 36, sumZ / 36);
 
-
+	// rotation X 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::X))
 	{
 		for (int i = 0; i < 108; i += 3)
@@ -177,6 +177,46 @@ void Game::update()
 		}
 	}
 	
+
+	// rotation Y
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Y))
+	{
+		for (int i = 0; i < 108; i += 3)
+		{
+			//adapting to vector
+			db::Vector3 v(vertices[i], vertices[i + 1], vertices[i + 2]);
+
+			//rotating
+			v = v - center;
+			v = v * db::Matrix3::rotationY(1);
+			v = v + center;
+
+			//reassigning value 
+			vertices[i] = v.x;
+			vertices[i + 1] = v.y;
+			vertices[i + 2] = v.z;
+		}
+	}
+
+	// rotation Z 
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
+	{
+		for (int i = 0; i < 108; i += 3)
+		{
+			//adapting to vector
+			db::Vector3 v(vertices[i], vertices[i + 1], vertices[i + 2]);
+
+			//rotating
+			v = v - center;
+			v = v * db::Matrix3::rotationZ(1);
+			v = v + center;
+
+			//reassigning value 
+			vertices[i] = v.x;
+			vertices[i + 1] = v.y;
+			vertices[i + 2] = v.z;
+		}
+	}
 
 }
 
