@@ -144,28 +144,36 @@ void Game::update()
 	elapsed = clock.getElapsedTime();
 
 	cout << "Update up" << endl;
-
 	
-	//moving left
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+	//center calculation 
+	float sumX = 0;
+	float sumY = 0;
+	float sumZ = 0;
+	for (int i = 0; i < 108; i += 3)
 	{
-		for (int i = 0; i < 108; i++)
-		{
-			if (i % 3 ==  0)
-			{
-				vertices[i] -= 0.001;
-			}
-		}
+		sumX += vertices[i];
+		sumY += vertices[i + 1];
+		sumZ += vertices[i + 2];
 	}
-	//moving right
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+	db::Vector3 center(sumX / 36, sumY / 36, sumZ / 36);
+
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::X))
 	{
-		for (int i = 0; i < 108; i++)
+		for (int i = 0; i < 108; i += 3)
 		{
-			if (i % 3 == 0)
-			{
-				vertices[i] += 0.001;
-			}
+			//adapting to vector
+			db::Vector3 v(vertices[i], vertices[i+1], vertices[i+2]);
+			
+			//rotating
+			v = v - center;
+			v = v * db::Matrix3::rotationX(1);
+			v = v + center;
+
+			//reassigning value 
+			vertices[i] = v.x;
+			vertices[i + 1] = v.y;
+			vertices[i + 2] = v.z;
 		}
 	}
 	
