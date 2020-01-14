@@ -9,7 +9,7 @@
 
 using namespace std;
 using namespace sf;
-using namespace gpp;
+using namespace db;
 
 class Game
 {
