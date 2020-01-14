@@ -2,6 +2,7 @@
 
 bool flip = false;
 int current = 1;
+int triangleNumber = 36;
 
 Game::Game() : window(VideoMode(800, 600), "OpenGL Cube")
 {
@@ -131,7 +132,7 @@ void Game::initialize()
 {
 	isRunning = true;
 
-	//glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+	
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	gluPerspective(45.0, window.getSize().x / window.getSize().y, 1.0, 500.0);
@@ -143,11 +144,39 @@ void Game::update()
 	elapsed = clock.getElapsedTime();
 
 	cout << "Update up" << endl;
+
+	
+	//moving left
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+	{
+		for (int i = 0; i < 108; i++)
+		{
+			if (i % 3 ==  0)
+			{
+				vertices[i] -= 0.001;
+			}
+		}
+	}
+	//moving right
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+	{
+		for (int i = 0; i < 108; i++)
+		{
+			if (i % 3 == 0)
+			{
+				vertices[i] += 0.001;
+			}
+		}
+	}
+	
+
 }
 
 void Game::render()
 {
 	cout << "Drawing" << endl;
+
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glEnableClientState(GL_COLOR_ARRAY);
@@ -155,9 +184,7 @@ void Game::render()
 
 	glVertexPointer(3, GL_FLOAT, 0, &vertices);
 	glColorPointer(3, GL_FLOAT, 0, &colors);
-
-	//glDrawArrays(GL_TRIANGLES, 0, 3);
-
+	
 	glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, &vertex_index);
 
 	glDisableClientState(GL_COLOR_ARRAY);
